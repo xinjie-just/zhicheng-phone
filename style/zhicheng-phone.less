@@ -1,0 +1,967 @@
+/*
+ * author: lixinjie
+ * date: 20170304
+ * max-width: 544px
+ * 修改样式时，请修改对应less
+ * */
+@charset "utf-8";
+
+//设置所有浏览器中外边距不为零的元素的外边距为零
+body, h1, h2, h3, h4, h5, h6, p, hr, blockquote, pre, textarea, fieldset, figure, ul, ol, dl, dd, menu { margin: 0; }
+
+//设置所有浏览器中内填充不为零的元素的内填充为零
+input, textarea, button, select, option, fieldset, legend, ul, ol, menu, th, td { padding: 0; }
+
+//设置所有浏览器中边框不为零的元素的边框为零
+hr, progress, input, textarea, button, select, fieldset { border: 0; }
+
+//设置所有元素的盒模型，将内填充和边距算在宽或高之列 
+* {
+    &,
+    &:before,
+    &:after {
+        box-sizing: border-box;
+    }
+}
+
+/*===引入normalize.css的样式===*/
+//在 IE浏览器 和 iOS 设备的浏览器中阻止调整字体的尺寸 
+html {
+    -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+}
+
+//为 body 元素设置字体尺寸和类型
+@text-color: #333;
+@main-color: #e01c21;
+@fs: 16px;
+.page-width {    
+    width: 100%;
+    max-width: 544px;
+    margin-right: auto;
+    margin-left: auto;
+}
+body {
+    .page-width;
+    font-size: @fs;
+    color: @text-color;
+    font-family: "Microsoft Yahei", Arial, sans-serif;
+}
+
+//在 IE 9 及低版本浏览器中为下列元素设置为 inline-block 的显示方式 
+audio,
+canvas,
+progress,
+video {
+    display: inline-block;
+}
+
+//在 iOS 4-7 中为无 controls属性的 audio 元素添加正确的显示方式
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+//在 Chrome, Firefox 和 Opera 中设置垂直方向基线对齐方式 
+progress { vertical-align: baseline; }
+
+//在 IE 中添加正确的显示方式
+template,
+[hidden] { display: none; }
+
+/* ===链接=== */
+//在 IE 10 中移除链接被激活后的灰色背景
+//在 iOS 8+ 和 Safari 8+ 中删除链接下划线位置处的空白
+a {
+    color: @text-color;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    text-decoration: none;
+    &:focus,
+    &:active,
+    &:hover {
+        //当链接处于焦点、被激活和鼠标悬停其上时清除轮廓
+        outline-width: 0;
+    }
+}
+
+
+/* ===文本=== */
+//在 Firefox 39 及之前的版本中移除 abbr 元素的下边框
+//在 Chrome, Edge, IE, Opera 和 Safari 中为 abbr 元素添加下划线
+abbr[title] {
+    border-bottom: none;
+    text-decoration: underline;
+}
+
+//在 Safari 6 中防止下列元素通过后面的规则重复的应用程序的字体为粗体
+b,
+strong {
+    font-weight: inherit;
+}
+
+//在 Chrome, Edge 和 Safari 浏览器中为下列元素添加正确的字体粗细 
+b,
+strong { font-weight: bolder; }
+
+//在 Android 4.3 及之前系统的设备中的浏览器为下列元素添加字体风格为斜体
+dfn {
+    font-style: italic;
+}
+
+//在 Chrome, Firefox 和 Safari 浏览器中纠正在含有 section 和 article 语境下的 h1 元素的字体尺寸和外边距
+article h1,
+section h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+//在 IE 9 及之前的浏览器版本中为 mark 元素添加背景颜色和字体颜色 
+mark {
+    background-color: #ff0;
+    color: #000;
+}
+
+//为 small 元素设置字体尺寸为离其最近的含有 font-size 属性的祖先元素的值的 80%
+small {
+    font-size: 80%;
+}
+
+//防止 sub 和 sup 元素影响行高 
+.sub-sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+sub {
+    .sub-sup;
+    bottom: -0.25em;
+}
+sup {
+    .sub-sup;
+    top: -0.5em;
+}
+
+/* ===嵌入式内容=== */
+//在 IE 10 及更早的浏览器中当图片处于链接内部时移除图片的边框
+img {
+    border-style: none;
+}
+
+//在 IE 浏览器中当 svg 元素不是根元素时隐藏溢出
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* ===分组内容=== */
+//纠正字体尺寸的继承和缩放(momospace字体是linux系统下的默认字体)
+//在所有浏览器中纠正奇数的以 em 作为单位的字体尺寸
+code,
+kbd,
+pre,
+samp {
+    font-family: monospace, monospace;
+    font-size: @fs;
+}
+
+//在 Firefox 浏览器下为 hr 元素添加正确的和模型尺寸计算方式
+//在 Edge 和 IE 中 hr 元素溢出时不隐藏
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+/* ===表单=== */
+//改变字体属性为继承
+//在 Firefox 和 Safari 中为下列元素移除外边距
+button,
+input,
+select,
+textarea {
+    font: inherit;
+    margin: 0;
+}
+//通过之前的规则修复 optgroup 元素的字体粗细
+optgroup {
+    font-weight: bold;
+}
+
+//溢出时不隐藏 
+button,
+input {
+    overflow: visible;
+}
+
+//移除文本大小写的继承
+button,
+select {
+    text-transform: none;
+}
+
+//在 Android 4 系统版本中阻止破坏本地的音频视频控件的错误
+//在 iOS 和 Safari 中纠正不能点击的类型
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+    cursor: pointer;
+    -webkit-appearance: button;
+    &:focus {
+        outline: none;
+    }
+}
+//在 Firefox 中移除内部边框和内填充(firefox浏览器中button元素点击时会出现虚线边框)
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+//由先前的规则恢复焦点样式设置
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+    outline: 1px dotted ButtonText;
+}
+
+//设置 fieldset 元素的 border, margin 和 padding 属性的值 
+fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+}
+
+//在 Edge 和 IE 中纠正文本包裹
+//纠正在 IE 中从 fieldset 元素继承而来的颜色值
+//在所有浏览器中当开发者清零了 fieldset 元素的属性时，移除 padding 属性的值，以便他们能找出其它错误
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+
+//在 IE 浏览器中移除默认的垂直导航条
+textarea {
+    overflow: auto;
+}
+
+//在 IE 10 及之前的浏览器中改变盒模型的默认规则，即将内填充和边框也算在宽高之内 
+[type="checkbox"],
+[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+//纠正在 Chrome 浏览器中递增和递减按钮的光标样式
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+//纠正 Chrome 和 Safari 浏览器奇怪的外观（看上去像文本框）
+//纠正在 Safari 浏览器中的轮廓样式（设置轮廓的偏移）
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+//在 OS X 的 Chrome 和 Safari 浏览器中删除内填充和移除按钮
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+//纠正在 Chrome, Edge 和 Safari 中文本占位符属性的样式 
+::-webkit-input-placeholder {
+    color: inherit;
+    opacity: 0.54;
+}
+
+//纠正在 iOS 和 Safair 中可点击类型不能点击的样式
+//更改字体属性，在 Safari 中以继承的方式。
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+/* ===表格=== */
+//设置表格的边框合并为单一的边框，
+//border-collapse 属性会忽略 border-spacing(相邻单元格边框间的距离) 属性和 empty-cells(是否在空单元格周围绘制边框)
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+caption,
+th {
+    text-align: left;
+}
+
+/* ===列表=== */
+//设置列表的标记类型为无 
+ol,
+ul {
+    list-style-type: none;
+}
+
+
+/* ===关于浮动=== */
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.clearfix {
+    &:before {
+        content: "";
+        display: table;        
+    }
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
+/*===矢量图标字体===*/
+@font-face {font-family: "iconfont";
+    src: url('../iconfont/iconfont.eot?t=1488595494548'); /* IE9*/
+    src: url('../iconfont/iconfont.eot?t=1488595494548#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url('../iconfont/iconfont.woff?t=1488595494548') format('woff'), /* chrome, firefox */
+    url('../iconfont/iconfont.ttf?t=1488595494548') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('../iconfont/iconfont.svg?t=1488595494548#iconfont') format('svg'); /* iOS 4.1- */
+}
+.iconfont {
+    font-family:"iconfont" !important;
+    font-size: @fs;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.icon-menu:before { content: "\e600"; }
+.icon-time:before { content: "\e620"; }
+.icon-close:before { content: "\e614"; }
+.icon-back:before { content: "\e63d"; }
+.icon-scan:before { content: "\e679"; }
+
+/* ===基础设置=== */
+figure {
+    overflow: hidden;
+    & a {
+        display: block;
+    }
+    & img {        
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+label {
+    cursor: pointer;
+    &:hover {
+        opacity: .8;
+    }
+}
+.ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.center-content {
+    display: block;
+    width: 96%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.responsive-img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+/*===首页===*/
+// 头部
+#header {
+    @height: 2.5rem;
+    z-index: 3;
+    position: relative;
+    width: 100%;
+    background-color: @main-color;
+    height: 2.5rem;
+    & h1 {
+        z-index: 3;
+        width: 100%;
+        height: @height;
+        line-height: @height;
+        font-size: @fs;
+        font-weight: normal;
+        color: #fff;
+        text-align: center;        
+    }
+    & nav {
+        z-index: 3;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        & .menu-wrap {
+            height: @height;
+        }
+    }
+    & i {        
+        font-size: 1.2rem;
+        color: #fff;
+    }
+    & .icon-back {
+        display: block;
+        z-index: 4;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: @height;
+        height: @height;
+        line-height: @height;
+        text-align: center;
+        cursor: pointer;   
+    }    
+}
+#menu {
+    @height: 2.5rem;
+    z-index: 4;
+    display: block;
+    float: right;
+    width: @height;
+    height: @height;
+    line-height: @height;
+    text-align: center;
+    background-color: transparent;
+    & .icon-close {
+        display: none;
+    }
+}
+#navList {
+    display: none;
+    z-index: 4;
+    width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #fff;
+    & li  {
+        width: 100%;
+        text-align: center;
+        margin-top: .5rem;
+        &:first-of-type {
+            margin-top: 0;
+        }
+    }
+    & a {
+        display: inline-block;
+        font-size: .8rem;
+        padding: .4rem 1.3rem;
+        border-bottom: .05rem solid transparent;     
+        &.active {
+            color: @main-color;
+            border-bottom-color: @main-color;            
+        }   
+    }
+}
+//banner图
+//案例
+.home-case {
+    margin-top: 20px;
+    .center-content;
+    & .more {
+        margin-top: .9rem;
+        text-align: center;
+        & a {
+            display: inline-block;
+            padding: .4rem .6rem;
+            border: 1px solid #00552e;
+            border-radius: .2rem;
+            font-size: @fs - 3;
+            color: #00552e;
+        }
+    }
+}
+.home-case ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & li {
+        width: 48%;
+        margin-bottom: 1rem;
+        & a {
+            display: block;
+        }
+    }
+    & img {
+        display: block;
+        width: 180;
+        height: 90px;
+    }
+    & h3 {
+        margin-top: .7rem;
+        font-size: @fs;
+        .ellipsis;
+    }
+}
+.home-section {
+    margin-top: 1.5rem;
+    .center-content;
+    & h2 {
+        margin-bottom: .9rem;
+    }
+    & span.cn {
+        display: inline-block;
+        position: relative;
+        font-size: @fs + 1;
+        line-height: 1.3;
+        margin-bottom: .4rem;
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: .2rem;
+            right: -.4rem;
+            width: .2rem;
+            height: .2rem;
+            border-radius: 50%;
+            background-color: #0068b7;
+        }
+    }
+    & span.en {
+        display: block;
+        position: relative;
+        font-size: @fs;
+        line-height: 1.4;
+        text-transform: uppercase;
+        &:after {
+            content: "";
+            position: absolute;
+            bottom: -.3rem;
+            left: 0;
+            width: 3rem;
+            height: 2px;
+            background-color: @main-color;
+        }
+    }
+}
+//公司简介
+.home-intro {
+    & p {
+        font-size: @fs - 2;
+        line-height: 1.6;
+        margin-bottom: .8rem;
+        text-indent: 2em;
+    }
+    & figure {
+        width: 100%;
+    }
+}
+//新闻动态
+.home-news ul li {
+    margin-bottom: .6rem;
+    & a {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    & figure {
+        width: 120px;
+        height: 90px;
+        margin-right: 1rem;
+        & img {
+            display: block;
+            width: 120px;
+            height: 90px;
+        }
+    }
+    & .text {
+        flex: 1;
+        & time {
+            display: block;
+            margin-bottom: .4rem;
+            font-size: @fs - 2;   
+        }
+        & h4 {
+            font-size: @fs - 1;
+            font-weight: normal;
+        }
+    }
+}
+.home-news {
+    & .more {
+        margin-top: 1rem;
+        text-align: center;
+        & a {
+            display: inline-block;
+            font-size: @fs - 2;
+            color: #4d4d4d;
+            padding: .5rem .8rem;
+        }
+    }
+}
+//合作伙伴
+.home-partner ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & li {
+        border: 1px solid #e6e6e6;
+        width: 33.33%;
+        height: 100px;
+        padding: 3px;
+        & a {
+            position: relative;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        & img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            max-width: 100%;
+            height: auto
+        }
+    }    
+}
+@footerMarginBottom: 2rem;
+#footer {
+    margin-top: @footerMarginBottom;
+    background-color: #00552E;
+    padding: .6rem 1rem;
+    & small {
+        display: block;
+        line-height: 1.4;
+        color: #fff;
+        text-align: center;
+    }
+}
+/*===联系我们===*/
+.contact-main {
+    .center-content;
+    @mt: 1.2rem;
+    @lh: 1.4;
+    & > div {
+        margin-top: @mt;
+        line-height: @lh;
+        &.inquiry {
+            font-size: 1rem;
+            color: @main-color;
+            & span {
+                display: block;
+                font-size: .7rem;
+                color: #666;
+            }
+            .contact-heading {
+                color: @main-color;
+                font-size: .9rem;
+            }
+        }
+        &.tel a {
+            display: block;
+            color: @main-color;
+            font: .9rem bold italic "arial, helvetica, sans-serif";
+        }
+    }
+    & h2 {
+        font-size: 1.5rem;
+        font-family: "宋体";
+        color: #303030;
+        margin-top: @mt;
+        text-transform: uppercase;
+    }
+    & .wecat-info {
+        display: inline-block;
+        z-index: 2;
+        background-color: #fff;
+        box-shadow: 0 0 .2rem #303030;
+        border: 1px solid #a0a0a0;
+        padding: .2rem;
+        margin-top: .6rem;
+        border-radius: .15rem;
+        & img {
+            display: block;
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+    }
+}
+
+/*===关于我们===*/
+.company-show {
+    margin-top: 2rem;
+}
+.culture {
+    margin-top: 2rem;
+    & .culture-list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;
+        & li {
+            flex: 1;
+            height: 82px;
+            line-height: 20px;
+            background: url(../img/company-info-bg.png) no-repeat center;
+            padding-top: 21px;
+            text-align: center;
+            font-size: @fs - 4;
+            color: #fff;
+        }
+    }
+    & .culture-text {
+        margin-top: 1rem;
+        text-align: center;
+        color: @main-color;
+        font-size: @fs - 2;
+    }
+}
+
+/*===新闻动态===*/
+.news {
+    margin-top: 2rem;
+    .center-content;
+}
+.news-list li {
+    margin-bottom: .6rem;
+    & a {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+    }
+    & figure {
+        width: 120px;
+        height: 90px;
+        margin-right: 1rem;
+        & img {
+            display: block;
+            width: 120px;
+            height: 90px;
+        }
+    }
+    & .text {
+        flex: 1;
+        & time {
+            display: block;
+            margin-bottom: .4rem;
+            font-size: @fs - 2;   
+        }
+        & h4 {
+            font-size: @fs - 1;
+            font-weight: normal;
+        }
+    }
+}
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    border-radius: 4px;
+    & > li {
+        display: inline;
+        & > a,
+        & > span {
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #b3b3b3;
+            text-decoration: none;
+            background-color: #fff;
+            border: 1px solid #b3b3b3; 
+        }
+        &:first-child > a,
+        &:first-child > span {
+            margin-left: 0;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+        }
+        &:last-child > a,
+        &:last-child > span {
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+        }
+        & > a:focus,
+        & > a:hover,
+        & > span:focus,
+        & > span:hover {
+            z-index: 2;
+            color: #fff;
+            background-color: @main-color;
+            border-color: @main-color;
+        }
+    }
+    & > .active > a,
+    & > .active > a:focus,
+    & > .active > a:hover,
+    & > .active > span,
+    & > .active > span:focus,
+    & > .active > span:hover {
+        z-index: 3;
+        color: #fff;
+        cursor: default;
+        background-color: @main-color;
+        border-color: @main-color;
+    }
+    & > .disabled > a,
+    & > .disabled > a:focus,
+    & > .disabled > a:hover,
+    & > .disabled > span,
+    & > .disabled > span:focus,
+    & > .disabled > span:hover {
+        color: #fff;
+        cursor: not-allowed;
+        background-color: @main-color;
+        border-color: @main-color;
+    }
+}
+
+/*===新闻动态详情===*/
+/* 文章正文 */
+.news-info {
+    margin-top: 2rem;
+    .center-content;
+    & article h2 {
+        margin-bottom: 0.5rem;
+        font-size: @fs;
+        font-weight: 500;
+        color: #666;
+        line-height: 1.2;
+    }
+    & .article-details {
+        border-top: 1px solid #efefef;
+        border-bottom: 1px solid #efefef;
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        margin-top: 0.5rem;
+    }
+    & .article-details img {
+        .responsive-img;
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.2rem auto;
+    }
+    & .article-details p {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+        line-height: 1.7;
+        text-indent: 2em;
+        text-align: justify;
+        word-wrap: break-word;
+    }
+}
+/* 上一篇，下一篇 */
+.page {
+    margin-top: 1rem;
+    font-size: @fs - 2;
+    & .next,
+    & .pre {
+        .ellipsis;
+        line-height: 1.8;
+        & a {
+            color: @main-color;
+        }
+    }   
+}
+
+/*===工程案例===*/
+.case {
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+    margin-bottom: -@footerMarginBottom;
+    background-color: #f0f2f5;
+    & ul.case-list {
+        .center-content;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        & li {
+            width: 48%;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 1rem;
+            border-radius: .5rem;
+            & a {
+                display: block;
+                padding-bottom: 1rem;
+            }
+            & figure {
+                width: 100%;
+                height: 100px;
+                overflow: hidden;
+                & img {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            & h3 {
+                font-size: @fs - 1;
+                margin-top: 1rem;
+                padding-right: .4rem;
+                padding-left: .4rem;
+                .ellipsis;
+            }
+        }
+    }
+    & .pagination {
+        .center-content;
+    }
+}
+#caseFooter {
+    margin-top: 0;
+}
+/*===案例详情===*/
+.case-info {
+    margin-top: 2rem;
+    .center-content;
+    & article h2 {
+        margin-bottom: 0.5rem;
+        font-size: @fs;
+        font-weight: 500;
+        color: #666;
+        line-height: 1.2;
+    }
+    & .article-details {
+        border-top: 1px solid #efefef;
+        border-bottom: 1px solid #efefef;
+        padding-top: 0.8rem;
+        padding-bottom: 0.8rem;
+        margin-top: 0.5rem;
+    }
+    & .article-details img {
+        .responsive-img;
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 1.2rem auto;
+    }
+    & .article-details p {
+        margin-top: 0.8em;
+        margin-bottom: 0.8em;
+        line-height: 1.7;
+        text-indent: 2em;
+        text-align: justify;
+        word-wrap: break-word;
+    }
+}
